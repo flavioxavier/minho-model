@@ -1,0 +1,133 @@
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+  <link rel="stylesheet" href="/node_modules/angular-material/angular-material.min.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Minho Model</title>
+</head>
+
+<body ng-app="MinhoModel" ng-cloak>
+  <div ng-controller="AppCtrl" layout="column" tabindex="-1" role="main" flex="" class="layout-column flex" ng-cloak="" ng-app="MinhoModel">
+
+    <md-toolbar class="md-hue-4 md-whiteframe-1dp">
+      <div class="md-toolbar-tools">
+        <h1 flex md-truncate class="">Minho Model</h1>
+      </div>
+    </md-toolbar>
+
+    <md-content layout-padding>
+
+
+      <md-card md-theme="default" ng-class="{ 'hide-xs': result }">
+        <form name="MinhoModelForm" ng-submit="submit(MinhoModelForm)">
+
+          <div layout="row" layout-xs="column" layout-wrap>
+            <md-input-container flex-gt-xs="45">
+              <label>Seric Iron</label>
+              <input required md-no-asterisk name="seric" type="number" step="0.001" ng-model="mmForm.seric">
+              <md-icon>mg/L</md-icon>
+              <div ng-messages="MinhoModelForm.seric.$error" multiple>
+                <div ng-message="required">This is required.</div>
+                <div ng-message="number">This needs to be a number.</div>
+                <div ng-message="step">You can only have up to 3 decimal places</div>
+              </div>
+            </md-input-container>
+
+            <md-input-container flex-gt-xs="50" flex-offset-gt-xs="5">
+              <label>Transferrin Saturation</label>
+              <input required md-no-asterisk name="transferrin" type="number" step="0.01" min="0" max="100" ng-model="mmForm.transferrin">
+              <md-icon>%</md-icon>
+              <div ng-messages="MinhoModelForm.transferrin.$error">
+                <div ng-message="required">This is required.</div>
+                <div ng-message="number">This needs to be a number.</div>
+                <div ng-message="min">Mininum value is 0%.</div>
+                <div ng-message="max">Maximum value is 100%.</div>
+                <div ng-message="step">You can only have up to 2 decimal places.</div>
+              </div>
+            </md-input-container>
+
+            <md-input-container flex-gt-xs="33" md-no-float>
+              <label>Gastrointestinal Symptoms: </label>
+              <input ng-hide="true" name="symptoms" value="0">
+              <md-switch class="md-primary" ng-model="mmForm.symptoms">
+                {{mmForm.symptoms ? "Yes" : "No"}}
+              </md-switch>
+            </md-input-container>
+
+            <md-input-container flex-gt-xs="33" md-no-float>
+              <label>Weight loss: </label>
+              <input ng-hide="true" name="weight" value="0">
+              <md-switch class="md-primary" ng-model="mmForm.weight">
+                {{mmForm.weight ? "Yes" : "No"}}
+              </md-switch>
+            </md-input-container>
+
+            <md-input-container flex-gt-xs="33">
+              <label>Need for Hospitalization: </label>
+              <input ng-hide="true" name="hospitalization" value="0">
+              <md-switch class="md-primary" ng-model="mmForm.hospitalization">
+                {{mmForm.hospitalization ? "Yes" : "No"}}
+              </md-switch>
+            </md-input-container>
+
+          </div>
+
+          <div>
+            <md-button class="md-raised md-primary" type="submit">Submit</md-button>
+          </div>
+
+        </form>
+      </md-card>
+
+      <md-card ng-show="result" md-colors="::{backgroundColor: 'default-primary-700'}">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline text-center">Probability to have a gastrointestinal malignancy:</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p class="md-display-2 text-center">{{result}}%</p>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="left center">
+          <md-button class="md-raised" ng-click="initForm()">Change values</md-button>
+        </md-card-actions>
+      </md-card>
+
+      <section class="note" layout="row" layout-sm="column" layout-align="right right" layout-wrap>
+        <p>
+          Minho Model was developed in a cohort of patients over 18 years old with iron deficiency anemia, defined as hemoglobin (Hb) lower than 13g/dL for men and 12g/dL for women, and either ferritin &lt;15&micro;g/L or transferrin saturation &lt;20%. From this cohort
+          the authors excluded patients with overt gastrointestinal or extra-gastrointestinal bleeding, total gastrectomy and exclusively vegetarian diet. Please note that Minho Model is still under prospective validation and therefore results obtained
+          from this score should be interpreted with caution. </p>
+        <p>All data inserted in this page will be exclusively used to calculate the score; No data will be stored, leave the user browser, sent over the internet or used for any other intent.</p>
+        <div class="label">Disclosures</div>
+      </section>
+
+
+    </md-content>
+  </div>
+
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="/node_modules/angular/angular.min.js"></script>
+  <script src="/node_modules/angular-animate/angular-animate.min.js"></script>
+  <script src="/node_modules/angular-aria/angular-aria.min.js"></script>
+  <script src="/node_modules/angular-messages/angular-messages.min.js"></script>
+  <script src="/node_modules/angular-material/angular-material.min.js"></script>
+  <script src="/node_modules/decimal.js/decimal.min.js"></script>
+
+  <!-- Your application bootstrap  -->
+  <script type="text/javascript">
+    /**
+     * You must include the dependency on 'ngMaterial'
+     */
+    angular.module('MinhoModel', ['ngMaterial', 'ngMessages']);
+  </script>
+
+
+  <script src="/controler.js"></script>
+
+</body>
+
+</html>

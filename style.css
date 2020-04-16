@@ -1,0 +1,27 @@
+.note {
+  background: #f7f7f7;
+  border-radius: 3px;
+  font-size: 0.8em;
+  margin: 1em;
+  opacity: 0.54;
+  padding-top: 15px;
+  position: relative !important;
+}
+
+.note .label {
+  font-size: 14px;
+  left: 7px;
+  opacity: 0.8;
+  position: absolute;
+  top: 5px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+@media (max-width:599px) {
+  .md-icon-right .material-icons {
+    font-size: 0.8em;
+  }
+}
